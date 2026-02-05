@@ -10,7 +10,6 @@ export default function Log({ onSwitch, onReset }) {
   const [password, setPassword] = useState("");
   const [showPass, setShow] = useState(false);
 
-  /* ───── Telegram widget ───── */
   useEffect(() => {
     window.onTelegramAuth = (user) => {
       loginWithTelegram(user)
@@ -38,7 +37,6 @@ export default function Log({ onSwitch, onReset }) {
     };
   }, []);
 
-  /* ───── form submit ───── */
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

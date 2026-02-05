@@ -159,7 +159,6 @@ export default function StrategyPortfolioPage() {
             </button>
           </header>
 
-          {/* KPI */}
           <section className="kpi-grid">
             <div className="kpi-card">
               <p className="kpi-label">Equity</p>
@@ -190,9 +189,7 @@ export default function StrategyPortfolioPage() {
             </div>
           </section>
 
-          {/* Charts */}
           <section className="chart-row">
-            {/* Balance / Equity */}
             <div
               className="chart-box clickable"
               onClick={() =>
@@ -222,7 +219,6 @@ export default function StrategyPortfolioPage() {
               </div>
             </div>
 
-            {/* Drawdown */}
             <div
               className="chart-box clickable"
               onClick={() =>
@@ -330,7 +326,6 @@ export default function StrategyPortfolioPage() {
               </div>
             </div>
 
-            {/* Daily P/L */}
             <div
               className="chart-box clickable"
               onClick={() =>
@@ -360,7 +355,6 @@ export default function StrategyPortfolioPage() {
             </div>
           </section>
 
-          {/* Strategy description */}
           <section className="description">
             <h3>Strategy description</h3>
             <div
@@ -373,7 +367,6 @@ export default function StrategyPortfolioPage() {
         </main>
       </div>
 
-      {/* Invest/Withdraw modal */}
       <MoneyModal
         open={moneyModal.open}
         title={moneyModal.type === 'withdraw' ? 'Withdraw units' : 'Invest USD'}
@@ -384,7 +377,6 @@ export default function StrategyPortfolioPage() {
         onSubmit={moneyModal.type === 'withdraw' ? handleWithdraw : handleInvest}
       />
 
-      {/* Full-screen chart modal */}
       <ChartModal open={popup.open} title={popup.title} onClose={closeChart}>
         {popup.chart}
       </ChartModal>

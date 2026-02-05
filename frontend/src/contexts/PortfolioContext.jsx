@@ -14,17 +14,13 @@ import {
   getHolding,
 } from "../api/portfolios";
 
-/* ────────────────────────────────────────── */
-
 const PortfolioContext = createContext();
 
-/* helper: convert numeric strings from API to Number */
 const toNum = (v) => (v == null ? null : +v);
 
 export function PortfolioProvider({ children }) {
   const [strategies, setStrategies] = useState([]); 
 
-  /* ───────── 1. initial load ───────── */
   useEffect(() => {
     listPortfolios(50, 1, true)
       .then((res) => {
@@ -60,8 +56,6 @@ export function PortfolioProvider({ children }) {
       .catch((e) => console.error("Failed to load portfolios:", e));
   }, []);
 
-  /* ───────── 2. quick Invest / Withdraw from strategy list ─────────
-     (the "Invest" button on the StrategyCard).  */
   const toggleInvest = async (id) => {
     setStrategies((prev) =>
       prev.map((s) =>
@@ -83,19 +77,16 @@ export function PortfolioProvider({ children }) {
     }
   };
 
-  /* ───────── 3. helper: refresh one portfolio locally ───────── */
   const refreshOne = (id, patch = {}) =>
     setStrategies((prev) =>
       prev.map((s) => (s.id === id ? { ...s, ...patch } : s))
     );
 
-  /* ───────── 4. list of portfolios the user invested in ───────── */
   const invested = useMemo(
     () => strategies.filter((s) => s.invested),
     [strategies]
   );
 
-  /* ───────── 5. aggregated charts (Dashboard) ───────── */
   const aggCharts = useMemo(() => {
     const be = new Map();
     const pl = new Map(); 
@@ -117,7 +108,6 @@ export function PortfolioProvider({ children }) {
     };
   }, [invested]);
 
-  /* ───────── 6. KPI summary for Dashboard ───────── */
   const summary = useMemo(() => {
     const total_equity = invested.reduce((a, s) => a + (s.equity || 0), 0);
     const total_pnl    = invested.reduce((a, s) => a + (s.net_profit || 0), 0);
@@ -129,14 +119,13 @@ export function PortfolioProvider({ children }) {
     };
   }, [invested]);
 
-  /* ───────────────────────── provider ───────────────────────── */
   return (
     <PortfolioContext.Provider
       value={{
         strategies,
         invested,
-        toggleInvest, 
-        refreshOne,   
+        toggleInvest,
+        refreshOne,
         summary,
         aggCharts,
         getHistory,

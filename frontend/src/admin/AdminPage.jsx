@@ -1,4 +1,3 @@
-// src/admin/AdminPage.jsx
 import React, { useEffect, useState, useCallback } from "react";
 import dayjs from "dayjs";
 
@@ -40,7 +39,7 @@ export default function AdminPage() {
   const logout = async () => {
     try {
       await logoutApi();       
-    } catch {/* ignore */}
+    } catch {}
     clearCurrent();
     localStorage.removeItem("currentEmail");
     window.location.href = "/"; 

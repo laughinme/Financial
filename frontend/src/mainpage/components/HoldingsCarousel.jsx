@@ -3,9 +3,6 @@ import { Link } from 'react-router-dom';
 import SparklineChart from './charts/SparklineChart';
 import './holdingsCarousel.css';
 
-/**
- * @param {{data:{id:number,name:string,percentage:number,spark?:object[]}[], onShow:(name,data)=>void}} props
- */
 export default function HoldingsCarousel({ data = [], onShow = () => {} }) {
   if (!data.length) return null;
 
@@ -19,8 +16,8 @@ export default function HoldingsCarousel({ data = [], onShow = () => {} }) {
         >
           <div
             className="spark-box"
-            onClick={(e) => {          // separate click on chart → modal
-              e.preventDefault();      // don't follow the link
+            onClick={(e) => {
+              e.preventDefault();
               onShow(h.name, h.spark || []);
             }}
           >

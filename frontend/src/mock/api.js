@@ -1,25 +1,19 @@
-// frontend/src/mock/api.js
 const delay = (ms = 200) => new Promise(r => setTimeout(r, ms));
 
-/* ───── 0.  GET /dashboard/summary ───── */
 export async function fetchSummary() {
   await delay();
-  // Now we have two strategies: id:3 and id:4
-  // Let their equity be 25,000 + 18,000 = 43,000
   return {
-    total_equity   : 43000,    // sum of equity of both strategies
+    total_equity   : 43000,
     today_pl       : 18.44,
-    total_pnl      : 5000,     // just a demo value
-    num_portfolios : 2,        // now there are 2 portfolios
+    total_pnl      : 5000,
+    num_portfolios : 2,
     last_sync      : '2025-06-05T10:34:21Z',
   };
 }
 
-/* ───── 1.  GET /dashboard/charts ───── */
 export async function fetchCharts() {
   await delay();
   return {
-    // Demo data — unchanged
     portfolio_value: [
       { date:'2025-06-01', value: 12000 },
       { date:'2025-06-02', value: 22000 },
@@ -39,7 +33,6 @@ export async function fetchCharts() {
   };
 }
 
-/* ───── 2.  GET /dashboard/portfolios ───── */
 export async function fetchPortfolios() {
   await delay();
   return [
@@ -60,7 +53,6 @@ export async function fetchPortfolios() {
   ];
 }
 
-/* ───── 3.  GET /dashboard/transactions ───── */
 export async function fetchTx() {
   await delay();
   return [

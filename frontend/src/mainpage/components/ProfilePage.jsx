@@ -48,13 +48,11 @@ const RANGES = [
 export default function ProfilePage() {
   const navigate = useNavigate();
 
-  /* ─ summary ─ */
   const [summary, setSummary] = useState(null);
   useEffect(() => {
     getSummary().then(setSummary).catch(console.error);
   }, []);
 
-  /* ─ balance ─ */
   const [payBalance, setPayBalance] = useState(null);
   const fetchBalance = () =>
     getBalance().then(setPayBalance).catch(console.error);
@@ -62,10 +60,8 @@ export default function ProfilePage() {
     fetchBalance();
   }, []);
 
-  /* ─ investments count ─ */
   const { invested } = usePortfolio();
 
-  /* ─ transactions ─ */
   const [tx, setTx]         = useState(null);
   const [showAll, setShowAll] = useState(false);
   useEffect(() => {
@@ -73,9 +69,7 @@ export default function ProfilePage() {
   }, []);
   const visibleTx = tx ? (showAll ? tx : tx.slice(0, 5)) : [];
 
-  /* ─ chart transactions over time ─ */
   const [range, setRange] = useState(30);
-  // filter and map to chart data
   const chartData = useMemo(() => {
     if (!tx) return [];
     return tx
@@ -88,7 +82,6 @@ export default function ProfilePage() {
       );
   }, [tx, range]);
 
-  /* ─ Deposit / Withdraw modal ─ */
   const [modal, setModal] = useState({ open: false, type: null });
   const doDeposit  = async (usd) => {
     const { url } = await createDeposit(usd);
@@ -112,7 +105,6 @@ export default function ProfilePage() {
   };
   const onSubmit = modal.type === "deposit" ? doDeposit : doWithdraw;
 
-  /* ─ logout ─ */
   const handleLogout = async () => {
     try { await logoutApi(); } catch {}
     clearCurrent();
@@ -129,7 +121,6 @@ export default function ProfilePage() {
         <Sidebar />
 
         <main className="main-content profile-container">
-          {/* Header */}
           <div className="header-profile">
             <h1 style={{ margin: 0 }}>Profile</h1>
             <button
@@ -150,7 +141,6 @@ export default function ProfilePage() {
             </button>
           </div>
 
-          {/* KPI inline */}
           <div className="kpi-inline">
             <span>
               Total&nbsp;Balance
@@ -172,7 +162,6 @@ export default function ProfilePage() {
             </span>
           </div>
 
-          {/* Transactions chart */}
           <section className="chart">
             <h2 className="chart-title">All Transactions</h2>
             {chartData.length ? (
@@ -223,7 +212,6 @@ export default function ProfilePage() {
             />
           </section>
 
-          {/* Transactions list */}
           <section className="tx-block">
             <h2 className="section-title">Your Transactions</h2>
             {tx ? (
@@ -261,7 +249,6 @@ export default function ProfilePage() {
         </main>
       </div>
 
-      {/* MoneyModal */}
       <MoneyModal
         open={modal.open}
         title={modal.type === "deposit" ? "Deposit USD" : "Withdraw USD"}

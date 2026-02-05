@@ -1,12 +1,6 @@
 import React from "react";
 import "./timeRangeSelector.css";
 
-/**
- * @param ranges   
- * @param value    
- * @param onChange
- * @param disabled 
- */
 export default function TimeRangeSelector({ ranges, value, onChange, disabled = {} }) {
   return (
     <div className="range-bar">

@@ -8,16 +8,13 @@ const request = async (method, url, body) => {
     body: body ? JSON.stringify(body) : undefined,
   });
 
-  /* ——— 401 / 403 ——— */
   if (res.status === 401 || res.status === 403) {
     const err = new Error('unauthorized');
     err.status = res.status;
     throw err;
   }
 
-  /* --- other errors --- */
   if (!res.ok) {
-   
     let msg;
     try { msg = JSON.stringify(await res.clone().json()); }
     catch { msg = await res.text(); }
@@ -27,7 +24,6 @@ const request = async (method, url, body) => {
     throw err;
   }
 
-  /* 204 No Content */
   return res.status === 204 ? null : res.json();
 };
 

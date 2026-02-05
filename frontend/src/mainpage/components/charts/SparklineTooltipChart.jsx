@@ -10,9 +10,6 @@ import {
   CartesianGrid,
 } from 'recharts';
 
-/**
- * @param {Array<{ date: string, gain_percent: string|number }>} data
- */
 export default function SparklineTooltipChart({ data }) {
   if (!Array.isArray(data) || data.length === 0) return null;
 

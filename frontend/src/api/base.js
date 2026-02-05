@@ -1,16 +1,11 @@
 import axios from "axios";
 
-/**
- * Unified entry point for all REST requests.
- * baseURL is taken from VITE_API_URL passed in the Dockerfile.
- */
 export const API = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
-  withCredentials: true, // send cookies along with requests
+  withCredentials: true,
   timeout: 15000,
 });
 
-// intercept 401
 API.interceptors.response.use(
   (r) => r,
   (err) => {

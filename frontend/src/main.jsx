@@ -10,20 +10,16 @@ import { getMe } from "./api/users";
 function AuthSwitcher() {
   const [mode, setMode] = useState("loading"); 
 
-  /* ───── check cookie session ───── */
   useEffect(() => {
     getMe()
       .then(() => {
-        // session valid, redirect to dashboard
         window.location.href = "/main.html#/dashboard";
       })
       .catch(() => {
-        // 401 / 403 
         setMode("login");
       });
   }, []);
 
-  /* render nothing while waiting */
   if (mode === "loading") return null;
 
   return (

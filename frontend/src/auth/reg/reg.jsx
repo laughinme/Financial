@@ -11,7 +11,6 @@ export default function Reg({ onSwitch }) {
   const [password, setPassword] = useState("");
   const [showPass, setShow] = useState(false);
 
-  /* ───── Telegram widget ───── */
   useEffect(() => {
     window.onTelegramAuth = (user) => {
       linkTelegram(user, true)
@@ -37,7 +36,6 @@ export default function Reg({ onSwitch }) {
     };
   }, []);
 
-  /* ───── form submit ───── */
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -50,7 +48,6 @@ export default function Reg({ onSwitch }) {
     }
   };
 
-  /* ───── markup ───── */
   return (
     <form className="login-card" onSubmit={handleSubmit}>
       <h1 className="form-title">Registration</h1>

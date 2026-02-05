@@ -41,7 +41,6 @@ import {
 import { getBalance, createDeposit } from "../api/payments";
 import { listTransactions } from "../api/transactions";
 
-/* ───── helpers ───── */
 const fmtMoney = (n) => "$" + (+n).toLocaleString();
 const colored  = (n) => (+n >= 0 ? "text-green-600" : "text-red-600");
 
@@ -56,14 +55,12 @@ const RANGES = [
 export default function DashboardPage() {
   const navigate = useNavigate();
 
-  /* ─── Deposit-modal ─── */
   const [depModal, setDepModal] = useState(false);
   const doDeposit = async (amt) => {
     const { url } = await createDeposit(amt);
     window.location.href = url;
   };
 
-  /* ─── summary / balance ─── */
   const [summary, setSummary] = useState(null);
   const [payBal, setPayBal]   = useState(null);
 
@@ -76,8 +73,6 @@ export default function DashboardPage() {
     load();
   }, []);
 
-  /* ─── charts ─── */
- 
   const [rangePnl, setRangePnl] = useState(180);
   const [rangeVal, setRangeVal] = useState(180);
 
@@ -99,7 +94,6 @@ export default function DashboardPage() {
     getAllocation().then(setAlloc).catch(console.error);
   }, [rangePnl, rangeVal]);
 
-  /* ─── transactions ─── */
   const [tx, setTx]       = useState(null);
   const [showAll, setShow] = useState(false);
 
@@ -120,12 +114,10 @@ export default function DashboardPage() {
 
   const visibleTx = tx ? (showAll ? tx : tx.slice(0, 10)) : [];
 
-  /* ─── enlarge sparkline ─── */
   const [sparkModal, setSpark] = useState({ open: false, title: "", data: [] });
 
   const { invested, strategies } = usePortfolio();
 
-  /* logout */
   const handleLogout = async () => {
     try {
       await logoutApi();
@@ -140,14 +132,12 @@ export default function DashboardPage() {
   const totalPnl    = +summary.total_pnl    || 0;
   const todayPnl    = +summary.today_pnl    || 0;
 
-  /* ─────────── render ─────────── */
   return (
     <>
       <div className="layout">
         <Sidebar />
 
         <main className="main-content">
-          {/* Header */}
           <div className="top-bar">
             <span>
               Total&nbsp;Equity:&nbsp;<b>{fmtMoney(totalEquity)}</b>
@@ -178,7 +168,6 @@ export default function DashboardPage() {
             </button>
           </div>
 
-          {/* KPI */}
           <section className="kpi-grid">
             <div className="kpi-card">
               <p>Total P/L</p>
@@ -204,9 +193,7 @@ export default function DashboardPage() {
             </div>
           </section>
 
-          {/* Daily P/L + Allocation */}
           <section className="charts-row">
-            {/* Daily P/L */}
             <div className="chart">
               <h2 className="chart-title">Daily P/L</h2>
               {pnlData.length ? (
@@ -246,7 +233,6 @@ export default function DashboardPage() {
               />
             </div>
 
-            {/* Allocation */}
             <div className="chart">
               <h2 className="chart-title">Allocation</h2>
               {alloc.length ? (
@@ -312,7 +298,6 @@ export default function DashboardPage() {
             </div>
           </section>
 
-          {/* Portfolio value */}
           <section className="chart-wide">
             <h2 className="chart-title">Portfolio Value vs Time</h2>
             {valData.length ? (
@@ -346,9 +331,7 @@ export default function DashboardPage() {
             />
           </section>
 
-          {/* Holdings & Transactions */}
           <section className="bottom-col">
-            {/* Holdings */}
             <div className="portfolios-block">
               <h2 className="section-title">Portfolio Holdings</h2>
               <HoldingsCarousel
@@ -363,7 +346,6 @@ export default function DashboardPage() {
               />
             </div>
 
-            {/* Transactions */}
             <div className="tx-block">
               <h2 className="section-title">Latest Transactions</h2>
               {visibleTx.length ? (
@@ -396,7 +378,6 @@ export default function DashboardPage() {
             </div>
           </section>
 
-          {/* enlarge sparkline modal */}
           {sparkModal.open && (
             <div
               className="modal-overlay"
@@ -423,7 +404,6 @@ export default function DashboardPage() {
         </main>
       </div>
 
-      {/* MoneyModal for Deposit */}
       <MoneyModal
         open={depModal}
         title="Deposit USD"

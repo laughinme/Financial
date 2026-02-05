@@ -6,7 +6,6 @@ import "./strategyCard.css";
 const fmt = (n, d = 0) =>
   isNaN(+n) ? "—" : (+n).toFixed(d).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 
-/* risk icons */
 const riskIcons = (risk) => {
   const cnt = Math.min(3, Math.max(1, parseInt(risk, 10) || 3));
   return Array.from({ length: cnt }, (_, i) => <FiZap key={i} size={14} />);
@@ -38,7 +37,6 @@ export default function StrategyCard({ strategy }) {
 
   return (
     <article className="card-strategy">
-      {/* ───────────── COVER ───────────── */}
       <div className="card-strategy__cover" style={{ background: color }}>
         <div className="cover-content">
           <div className="pill">
@@ -64,7 +62,6 @@ export default function StrategyCard({ strategy }) {
         </div>
       </div>
 
-      {/* ───────────── BODY ───────────── */}
       <div className="card-strategy__body">
         <div className="metrics-row">
           <span>

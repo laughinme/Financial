@@ -29,7 +29,6 @@ export default function AvatarMenu({ initials = 'U' }) {
     return () => document.removeEventListener('mousedown', handler);
   }, [open]);
 
-  /** Logout */
   const handleLogout = async () => {
     try { await logoutApi(); } catch {}
     clearCurrent();

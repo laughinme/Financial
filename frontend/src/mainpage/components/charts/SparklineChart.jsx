@@ -1,4 +1,3 @@
-// src/mainpage/components/charts/SparklineChart.jsx
 import React from "react";
 import dayjs from "dayjs";
 import {
@@ -11,15 +10,8 @@ import {
   Tooltip,
 } from "recharts";
 
-/* convenient format for dates on the X axis */
 const formatDate = (d) => dayjs(d).format("DD MMM");
 
-/**
- * Mini-chart / full-size chart.
- *
- * @param {{date:string,gain_percent:number|string}[]} data
- * @param {boolean} full – if true → axes, grid, animation
- */
 export default function SparklineChart({ data, full = false }) {
   if (!Array.isArray(data) || data.length === 0) return null;
 
@@ -47,8 +39,8 @@ export default function SparklineChart({ data, full = false }) {
           stroke="#6B7280"
           tickLine={false}
           axisLine={{ stroke: "#D1D5DB" }}
-          tickFormatter={formatDate}   /* ← format here */
-          interval="preserveStartEnd"  /* do not cut edge labels */
+          tickFormatter={formatDate}
+          interval="preserveStartEnd"
         />
 
         <YAxis
