@@ -1,0 +1,10 @@
+import { PortfolioDetailPage } from "@/views/portfolio-detail";
+export const metadata = { title: "Стратегия" };
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  return <PortfolioDetailPage id={id} />;
+}
