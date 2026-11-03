@@ -181,3 +181,13 @@ node_modules/
 test.py
 /_temp
 /nginx/ssl
+
+# Next.js build and local verification
+.next/
+*.tsbuildinfo
+.env.local
+.env.*.local
+playwright-report/
+test-results/
+design/captures/
+next-env.d.ts
