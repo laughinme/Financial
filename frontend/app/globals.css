@@ -1,0 +1,113 @@
+@import "tailwindcss";
+@theme {
+  --color-canvas: #080808;
+  --color-surface: #121212;
+  --color-surface-hover: #1b1b1b;
+  --color-line: #2a2a2a;
+  --color-ink: #f0f0f0;
+  --color-muted: #a1a1a1;
+  --color-accent: #d1ff26;
+  --color-loss: #ff8585;
+  --font-sans: Arial, Helvetica, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
+  body {
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  button,
+  a,
+  input,
+  select {
+    -webkit-tap-highlight-color: transparent;
+  }
+  button,
+  a {
+    touch-action: manipulation;
+  }
+  button:not(:disabled),
+  select {
+    cursor: pointer;
+  }
+  button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+  }
+  ::selection {
+    background: var(--color-accent);
+    color: #080808;
+  }
+  input,
+  select {
+    color-scheme: dark;
+  }
+  dialog {
+    color: var(--color-ink);
+    background: var(--color-surface);
+  }
+  dialog::backdrop {
+    background: #000b;
+    backdrop-filter: blur(5px);
+  }
+}
+@layer components {
+  .panel {
+    @apply border border-line bg-surface rounded-sm;
+  }
+  .button {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-sm border border-line px-4 py-2 text-sm font-medium transition-colors hover:bg-surface-hover;
+  }
+  .button-primary {
+    @apply border-accent bg-accent text-black hover:bg-[#bce91c];
+  }
+  .field {
+    @apply min-h-12 w-full rounded-sm border border-line bg-canvas px-3 text-sm outline-none focus:border-accent;
+  }
+  .label {
+    @apply block text-sm text-muted mb-2;
+  }
+  .eyebrow {
+    @apply font-mono text-[10px] uppercase tracking-[.18em] text-muted;
+  }
+  .page-title {
+    @apply text-3xl sm:text-4xl font-semibold tracking-tight;
+  }
+  .number {
+    @apply font-mono tabular-nums tracking-tight;
+  }
+  .table-cell {
+    @apply px-5 py-4 text-left text-sm border-b border-line;
+  }
+  .route-enter {
+    animation: enter 240ms ease-out;
+  }
+}
+@keyframes enter {
+  from {
+    opacity: 0.5;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
