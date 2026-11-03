@@ -148,3 +148,55 @@ export function DashboardPage() {
                             className={
                               i === 0 ? "h-1 bg-accent" : "h-1 bg-muted"
                             }
+                            style={{
+                              width: `${Math.max(0, Math.min(100, Number(item.percentage)))}%`,
+                            }}
+                          />
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+                <Link
+                  className="flex min-h-12 items-center border-t border-line px-5 text-xs text-muted hover:text-ink"
+                  href="/portfolio"
+                >
+                  Открыть стратегии →
+                </Link>
+              </section>
+            </div>
+            <section className="panel mb-6">
+              <SectionTitle
+                title="Ежедневный результат"
+                aside={<span className="eyebrow">За {days} дней</span>}
+              />
+              <RemoteState
+                loading={charts.loading}
+                error={charts.error}
+                retry={charts.reload}
+              >
+                {charts.data && (
+                  <Chart
+                    data={charts.data.pnl}
+                    series={[{ key: "pnl", name: "Прибыль / убыток" }]}
+                    label="Ежедневная прибыль и убыток"
+                    format={money}
+                    bars
+                  />
+                )}
+              </RemoteState>
+            </section>
+            <Transactions
+              rows={data.transactions}
+              footer={
+                <Link href="/profile" className="button text-xs">
+                  Все операции →
+                </Link>
+              }
+            />
+          </>
+        )}
+      </RemoteState>
+    </>
+  );
+}
