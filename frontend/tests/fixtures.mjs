@@ -148,3 +148,15 @@ export async function mockApi(context, options = {}) {
       ];
     else if (path.endsWith("/deposit"))
       data = { url: "https://checkout.stripe.com/test" };
+    else if (path.endsWith("/onboarding-link"))
+      data = { url: "https://connect.stripe.com/test" };
+    else if (request.method() === "POST") return route.fulfill({ status: 204 });
+    else throw new Error(`Unexpected API request ${path}`);
+    return route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify(data),
+    });
+  });
+  return requests;
+}
