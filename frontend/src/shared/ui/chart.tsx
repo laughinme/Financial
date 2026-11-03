@@ -148,3 +148,84 @@ export function Chart({
               const bounds = event.currentTarget.getBoundingClientRect();
               setFocused(
                 Math.max(
+                  0,
+                  Math.min(
+                    data.length - 1,
+                    Math.round(
+                      ((event.clientX - bounds.left) / bounds.width) *
+                        (data.length - 1),
+                    ),
+                  ),
+                ),
+              );
+            }}
+          />
+        </svg>
+        <div />
+        <div className="flex justify-between gap-2 font-mono text-[10px] text-muted sm:text-xs">
+          {[0, Math.floor((data.length - 1) / 2), data.length - 1]
+            .filter((v, i, a) => a.indexOf(v) === i)
+            .map((i) => (
+              <span key={i}>{date(data[i].date)}</span>
+            ))}
+        </div>
+      </div>
+      <details className="mt-2 text-xs text-muted">
+        <summary className="min-h-11 cursor-pointer py-3">
+          Таблица данных
+        </summary>
+        <div className="max-h-64 overflow-auto">
+          <table className="w-full text-left">
+            <thead>
+              <tr>
+                <th className="py-2">Дата</th>
+                {series.map((s) => (
+                  <th key={s.key}>{s.name}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((p, i) => (
+                <tr key={i}>
+                  <td className="py-2">{date(p.date)}</td>
+                  {series.map((s) => (
+                    <td key={s.key} className="number">
+                      {format(Number(p[s.key] ?? 0))}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+  );
+}
+export function RangeSelect({
+  value,
+  onChange,
+}: {
+  value: number;
+  onChange: (value: number) => void;
+}) {
+  return (
+    <div className="flex" role="group" aria-label="Период графика">
+      {[
+        [30, "1М"],
+        [90, "3М"],
+        [180, "6М"],
+        [360, "1Г"],
+      ].map(([days, text]) => (
+        <button
+          key={days}
+          className={`min-h-11 min-w-11 rounded-sm px-2 font-mono text-xs transition-colors ${value === days ? "bg-surface-hover text-accent" : "text-muted hover:text-ink"}`}
+          aria-pressed={value === days}
+          onClick={() => onChange(Number(days))}
+        >
+          {text}
+        </button>
+      ))}
+    </div>
+  );
+}
