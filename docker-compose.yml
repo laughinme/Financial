@@ -61,10 +61,10 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        VITE_API_URL: ""
+        API_PROXY_URL: "http://backend:8000"
     container_name: frontend
     environment:
-      - VITE_API_URL=
+      - API_PROXY_URL=http://backend:8000
     ports:
       - "5173:4173"
     # depends_on:
