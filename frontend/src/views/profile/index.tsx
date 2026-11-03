@@ -148,3 +148,60 @@ export function ProfilePage() {
                       { key: "withdrawals", name: "Выводы" },
                     ]}
                     bars
+                    format={money}
+                    label="История пополнений и выводов"
+                  />
+                )}
+              </RemoteState>
+            </section>
+            <RemoteState
+              loading={transactions.loading}
+              error={transactions.error}
+              retry={transactions.reload}
+            >
+              {transactions.data && (
+                <Transactions
+                  rows={transactions.data}
+                  footer={
+                    <>
+                      <button
+                        className="button text-xs"
+                        disabled={page === 1}
+                        onClick={() => setPage((p) => p - 1)}
+                      >
+                        ← Назад
+                      </button>
+                      <span className="eyebrow">Страница {page}</span>
+                      <button
+                        className="button text-xs"
+                        disabled={transactions.data.length < 10}
+                        onClick={() => setPage((p) => p + 1)}
+                      >
+                        Далее →
+                      </button>
+                    </>
+                  }
+                />
+              )}
+            </RemoteState>
+            <section className="panel mt-6">
+              <SectionTitle title="Подключить Telegram" />
+              <div className="space-y-5 p-5">
+                <p className="text-sm text-muted">
+                  Свяжите Telegram с аккаунтом для быстрого входа. Данные
+                  профиля могут быть обновлены из Telegram.
+                </p>
+                <TelegramAuth link onSuccess={linked} />
+              </div>
+            </section>
+            {notice && (
+              <p role="status" className="mt-4 text-sm">
+                {notice}
+              </p>
+            )}
+          </>
+        )}
+      </RemoteState>
+    </>
+  );
+}
