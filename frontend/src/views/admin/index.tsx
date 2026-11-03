@@ -148,3 +148,9 @@ export function AdminPage() {
             >
               Отмена
             </button>
+          </div>
+        </section>
+      )}
+    </>
+  );
+}
