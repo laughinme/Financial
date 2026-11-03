@@ -148,3 +148,8 @@ export function PortfolioDetailPage({ id }: { id: string }) {
               </p>
             </section>
           </>
+        )}
+      </RemoteState>
+    </>
+  );
+}
