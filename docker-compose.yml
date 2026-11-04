@@ -3,7 +3,6 @@ services:
     build:
       context: ./test_server
       dockerfile: Dockerfile
-    container_name: test_server
     env_file:
       - ./test_server/.env
     environment:
@@ -23,7 +22,6 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: backend
     env_file:
       - ./backend/.env
     environment:
@@ -44,7 +42,6 @@ services:
     build:
       context: ./bot
       dockerfile: Dockerfile
-    container_name: bot
     env_file:
       - ./bot/.env
     restart: unless-stopped
@@ -62,7 +59,6 @@ services:
       dockerfile: Dockerfile
       args:
         API_PROXY_URL: "http://backend:8000"
-    container_name: frontend
     environment:
       - API_PROXY_URL=http://backend:8000
     ports:
@@ -75,7 +71,6 @@ services:
 
   nginx:
     image: nginx:latest
-    container_name: nginx
     ports:
       - "443:443"
       - "80:80"
@@ -90,7 +85,6 @@ services:
 
   redis:
     image: redis:latest
-    container_name: redis_service
     ports:
       - "6380:6379"
     volumes:
@@ -104,7 +98,7 @@ services:
       - web
 
   db:
-    image: postgres:latest
+    image: postgres:17-alpine
     environment:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "postgres"
@@ -121,7 +115,7 @@ services:
     networks:
       - web
   test_db:
-    image: postgres:latest
+    image: postgres:17-alpine
     environment:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "postgres"
