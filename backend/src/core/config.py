@@ -25,13 +25,13 @@ class Config(BaseSettings):
     REDIS_PORT: int
     
     # Telegram bot settings
-    BOT_TOKEN: str
+    BOT_TOKEN: str = ''
 
     # Payment system settings
-    YOOKASSA_ACCOUNT_ID: str
-    YOOKASSA_SECRET: str
-    STRIPE_API_KEY: str
-    STRIPE_WEBHOOK_SECRET: str
+    YOOKASSA_ACCOUNT_ID: str = ''
+    YOOKASSA_SECRET: str = ''
+    STRIPE_API_KEY: str = ''
+    STRIPE_WEBHOOK_SECRET: str = ''
 
     # Site data (url, paths)
     SITE_URL: str
@@ -39,8 +39,8 @@ class Config(BaseSettings):
     # External services data
     MOCK_URL: str = 'http://localhost:8001/api/v1'
     MYFXBOOK_URL: str = 'https://www.myfxbook.com/api'
-    MYFXBOOK_LOGIN: str
-    MYFXBOOK_PASSWORD: str
+    MYFXBOOK_LOGIN: str = ''
+    MYFXBOOK_PASSWORD: str = ''
     
     class Config:
         env_file = f'{BASE_DIR}/.env'

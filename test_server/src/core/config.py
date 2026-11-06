@@ -28,8 +28,8 @@ class Config(BaseSettings):
     SITE_URL: str
     
     # External services data
-    MYFXBOOK_LOGIN: str
-    MYFXBOOK_PASSWORD: str
+    MYFXBOOK_LOGIN: str = ''
+    MYFXBOOK_PASSWORD: str = ''
     
     class Config:
         env_file = f'{BASE_DIR}/.env'
