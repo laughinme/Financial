@@ -99,7 +99,7 @@ jobs:
           HOST: ${{ vars.FINANCIALWORK_HOST }}
         run: |
           for i in $(seq 1 20); do
-            if curl -fsS "https://$HOST/" | grep -q 'html'; then echo "https://$HOST is up"; exit 0; fi
+            if curl -fsS "https://$HOST/login" | grep -q 'html'; then echo "https://$HOST is up"; exit 0; fi
             sleep 6
           done
-          echo "public / did not answer as expected"; exit 1
+          echo "public /login did not answer as expected"; exit 1

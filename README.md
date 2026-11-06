@@ -1,5 +1,7 @@
 # financialwork
 
+**Live demo:** https://finwork.prooood.ru. It runs on a home server and redeploys itself on every push to `main` ([how deploys work](deploy/home/README.md)).
+
 ## Local setup with Nginx and HTTPS
 
 1. Generate a self‑signed certificate:
